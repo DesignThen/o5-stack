@@ -1,0 +1,27 @@
+{
+  "projectName": "o5-stack-app",
+  "mode": "file-router",
+  "typescript": true,
+  "packageManager": "bun",
+  "includeExamples": false,
+  "tailwind": true,
+  "addOnOptions": {},
+  "git": true,
+  "install": true,
+  "routerOnly": false,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "eslint",
+    "cloudflare",
+    "convex",
+    "sentry",
+    "form",
+    "t3env",
+    "shadcn",
+    "table",
+    "posthog",
+    "tanstack-query",
+    "clerk"
+  ]
+}
