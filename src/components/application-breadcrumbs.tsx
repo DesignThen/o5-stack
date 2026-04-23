@@ -1,0 +1,56 @@
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "#/components/ui/breadcrumb";
+import { useApplicationBreadcrumbs } from "#/lib/router-breadcrumbs";
+import { Link } from "@tanstack/react-router";
+import { Fragment } from "react";
+
+interface CrumbProps extends React.ComponentProps<typeof BreadcrumbItem> {
+  to?: string;
+}
+
+function Crumb({ children, to, ...props }: CrumbProps) {
+  return (
+    <BreadcrumbItem {...props}>
+      {to ? (
+        <BreadcrumbLink render={<Link to={to} />}>{children}</BreadcrumbLink>
+      ) : (
+        <BreadcrumbPage className="line-clamp-1">{children}</BreadcrumbPage>
+      )}
+    </BreadcrumbItem>
+  );
+}
+
+export function ApplicationBreadcrumbs(
+  props: React.ComponentProps<typeof Breadcrumb>,
+) {
+  const data = useApplicationBreadcrumbs();
+
+  if (data.length === 0) {
+    return null;
+  }
+
+  return (
+    <Breadcrumb {...props}>
+      <BreadcrumbList>
+        {data.map((crumb, ix) => {
+          if (ix === data.length - 1) {
+            return <Crumb key={crumb.id}>{crumb.title}</Crumb>;
+          }
+
+          return (
+            <Fragment key={crumb.id}>
+              <Crumb to={crumb.to}>{crumb.title}</Crumb>
+              <BreadcrumbSeparator className="hidden md:block" />
+            </Fragment>
+          );
+        })}
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+}
