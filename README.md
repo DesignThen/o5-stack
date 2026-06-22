@@ -1,5 +1,9 @@
 # O5 Stack App
 
+```sh
+npx tiged DesignThen/o5-stack PROJECT_NAME
+```
+
 ## Setup
 
 ### Convex
